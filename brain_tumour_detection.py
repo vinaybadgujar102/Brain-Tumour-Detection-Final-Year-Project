@@ -134,15 +134,36 @@ model.compile(loss='binary_crossentropy',
               optimizer=tf.keras.optimizers.Adam(),
               metrics=['acc'])
 
-model.fit(x_train,
+history = model.fit(x_train,
           y_train,
           batch_size=128,
           epochs=200,
           validation_data=(x_valid, y_valid),)
 
+# history = model.fit(x_train,
+#                     y_train,
+#                     batch_size=32,
+#                     epochs=100,
+#                     validation_data=(x_valid, y_valid))
+
 # Saving the trained model
 model.save('brain_tumor_detection_model.h5')
 
+loss, accuracy = model.evaluate(x_valid, y_valid)
+print('Validation Loss:', loss)
+print('Validation Accuracy:', accuracy)
+
+# Print the keys in the history dictionary
+print(history.history.keys())
+
+# Plotting training and validation accuracy
+plt.plot(history.history['acc'])  # Update key based on available metrics
+plt.plot(history.history['val_acc'])  # Update key based on available metrics
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend(['Train', 'Validation'], loc='upper left')
+plt.show()
 
 
 labels = ["No", "Yes"]
@@ -174,7 +195,3 @@ for i in range(no_of_indices):
 plt.show()
 
 
-
-score = model.evaluate(x_valid, y_valid, verbose="0")
-
-print('Test accuracy:', score[1])
