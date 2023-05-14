@@ -140,11 +140,7 @@ history = model.fit(x_train,
           epochs=200,
           validation_data=(x_valid, y_valid),)
 
-# history = model.fit(x_train,
-#                     y_train,
-#                     batch_size=32,
-#                     epochs=100,
-#                     validation_data=(x_valid, y_valid))
+
 
 # Saving the trained model
 model.save('brain_tumor_detection_model.h5')
@@ -165,6 +161,14 @@ plt.ylabel('Accuracy')
 plt.legend(['Train', 'Validation'], loc='upper left')
 plt.show()
 
+# Plotting training and validation loss
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend(['Train', 'Validation'], loc='upper left')
+plt.show()
 
 labels = ["No", "Yes"]
 y_hat = model.predict(x_valid)
