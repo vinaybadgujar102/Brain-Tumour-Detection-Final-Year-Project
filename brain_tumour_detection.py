@@ -149,32 +149,12 @@ loss, accuracy = model.evaluate(x_valid, y_valid)
 print('Validation Loss:', loss)
 print('Validation Accuracy:', accuracy)
 
-# Print the keys in the history dictionary
-print(history.history.keys())
-
-# Plotting training and validation accuracy
-plt.plot(history.history['acc'])  # Update key based on available metrics
-plt.plot(history.history['val_acc'])  # Update key based on available metrics
-plt.title('Model Accuracy')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-
-# Plotting training and validation loss
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('Model Loss')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.show()
-
 labels = ["No", "Yes"]
 y_hat = model.predict(x_valid)
 no_of_indices = 15
 random_indices = np.random.choice(
     x_valid.shape[0], size=no_of_indices, replace=False)
+
 # Plot a random sample of 15 test images, with their predicted labels and ground truth
 figure = plt.figure(figsize=(20, 13))
 sub_title = "Random samples of 15 test images, with their predicted labels and ground truth"
